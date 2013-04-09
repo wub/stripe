@@ -1,28 +1,32 @@
-// Stripe
-// Jarrod Mosen
-// Working on turning this into a proper... thing
+function stripe(element, width, height, colours)
+{
+    "use strict";
 
-var canvas  = document.createElement("canvas"),
-    context = canvas.getContext("2d"), x;
+    var iterator,
+        target  = document.querySelector(element),
+        canvas  = document.createElement("canvas"),
+        context = canvas.getContext("2d"),
+        width   = width   || 1000,
+        height  = height  || 7,
+        colours = colours || [
+            '467F71', 'D3F263', '3E8C84',
+            '296B73', 'E52738', 'FEE63F',
+            '3BD2CC', '2BA6E8', 'B4D455'
+        ];
 
-canvas.width  = 1000;
-canvas.height = 50;
+    canvas.width = width;
+    canvas.height = height;
 
-// random hex vals from kuler
-var colours = [
-	'467F71', 'D3F263', '3E8C84',
-	'296B73', 'E52738', 'FEE63F',
-	'3BD2CC', '2BA6E8', 'B4D455'
-];
+    for (iterator = 0; iterator < canvas.width; iterator += 1)
+    {
+        // much nicer results with random in here
+        var random = Math.floor(Math.random() * 50);
 
-for (x = 0; x < canvas.width; x += 1) {
+        // grab random colour. shove it in.
+        context.fillStyle = "#" + colours[Math.floor(Math.random() * colours.length)];
+        context.fillRect((iterator * random), 0, (50 * random), height);
+    }
 
-	var rand = Math.floor(Math.random() * 55);
-
-	// grab random colour. shove it in.
-	context.fillStyle = "#" + colours[Math.floor(Math.random() * colours.length)];
-	context.fillRect((x * rand), 0, (50 * rand), 3);
+    // let's lather her up
+    target.style.background = "url(" + canvas.toDataURL("image/png") + ") repeat-x";
 }
-
-// convert into data url and apply as css
-document.body.style.background = "url(" + canvas.toDataURL("image/png") + ") repeat-x";
