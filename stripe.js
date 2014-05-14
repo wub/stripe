@@ -1,7 +1,4 @@
-'use strict';
-
-var iterator,
-    applyStripe = {},
+var applyStripe = {},
     target  = document.getElementById('stripe-loader'),
     canvas  = document.createElement('canvas'),
     context = canvas.getContext('2d'),
@@ -14,6 +11,8 @@ var iterator,
     canvas_height = canvas.height = height;
 
 function stripe() {
+  'use strict';
+
   applyStripe = window.setInterval(function () {
       var cursor = 0,
           max = (canvas_width / 10),
